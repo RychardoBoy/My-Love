@@ -1,0 +1,175 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confession untuk Kamu!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+    body {
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffdde1;
+      position: relative;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/lvidIQD.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+    }
+    .page {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      animation: fadeIn 1s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .active {
+      display: flex;
+    }
+    .text-box {
+      background: rgba(255, 50, 80, 0.8);
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      font-size: 1em;
+      margin: 10px 0;
+      width: 70%;
+    }
+    .image-container {
+      width: 200px;
+      height: 200px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background: linear-gradient(45deg, #ff0080, #ff77a9);
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      position: absolute;
+      bottom: 80px;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, #ff77a9, #ff0080);
+    }
+    .input-box {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 400px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #ff0080;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1em;
+    }
+    .signature {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      max-width: 400px;
+      font-size: 1em;
+      margin-top: 10px;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="page active" id="page1">
+    <div class="image-container">
+      <img src="https://i.imgur.com/DyaWYaM.jpeg" alt="Kenangan 1">
+    </div>
+    <div class="text-box">Sayang, kamu masih inget nggak pertama kali kita ketemu?</div>
+    <div class="text-box">Waktu itu aku langsung jatuh hati, hatiku yakin kamu itu spesial.</div>
+    <button class="btn" onclick="nextPage(2)" style="right: 20px;">Next</button>
+  </div>
+
+  <div class="page" id="page2">
+    <div class="image-container">
+      <img src="https://i.imgur.com/ochl8Vb.jpeg" alt="Kenangan 2">
+    </div>
+    <div class="text-box">Setiap senyummu itu seperti sihir, sekali lihat langsung bikin hati ini meleleh.</div>
+    <div class="text-box">Aku nggak bisa berhenti mikirin kamu.</div>
+    <button class="btn" onclick="nextPage(1)" style="left: 20px;">Back</button>
+    <button class="btn" onclick="nextPage(3)" style="right: 20px;">Next</button>
+  </div>
+
+  <div class="page" id="page3">
+    <div class="text-box" style="font-size: 2em;">I LOVE YOU ❤️💐</div>
+    <button class="btn" onclick="nextPage(2)" style="left: 20px;">Back</button>
+    <button class="btn" onclick="nextPage(4)" style="right: 20px;">Next</button>
+  </div>
+
+  <div class="page" id="page4">
+    <div class="text-box" style="font-size: 2em;">GOD BLESS YOU 🕊️</div>
+    <button class="btn" onclick="nextPage(3)" style="left: 20px;">Back</button>
+    <button class="btn" onclick="nextPage(5)" style="right: 20px;">Next</button>
+  </div>
+
+  <div class="page" id="page5">
+    <div class="text-box">Aku ingin tahu apa yang ada dalam hatimu. Tulis pesan untukku, aku akan membacanya dengan penuh cinta ❤️</div>
+    <div class="input-box">
+      <form action="https://formspree.io/f/mblgzplv" method="POST" style="text-align: left;">
+        <textarea name="message" placeholder="Tulis pesan untukku..."></textarea>
+        <button class="btn" type="submit" style="margin-left: 0;">Kirim</button>
+      </form>
+    </div>
+    <div class="signature">
+      <span>—Rychardo Boy Bonar Purba</span>
+      <span>~Megan Gracia Baly</span>
+    </div>
+    <button class="btn" onclick="nextPage(4)" style="left: 20px;">Back</button>
+  </div>
+
+  <script>
+    function nextPage(pageNumber) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      const nextPage = document.getElementById('page' + pageNumber);
+      if (nextPage) {
+        nextPage.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
